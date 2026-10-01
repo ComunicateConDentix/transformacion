@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#1c0049">
+  <meta name="description" content="Experiencia interactiva Clikea para impulsar la transformacion tecnologica.">
+  <title>Clikea | Transformacion tecnologica</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <aside class="side" aria-label="Etapas del recorrido">
+      <div class="burger" aria-hidden="true"><i></i><i></i><i></i></div>
+      <div class="tiles">
+        <img src="img/icono1.png" alt="Etapa inicial" width="256" height="256">
+        <img src="img/icono2.png" alt="Etapa de progreso" width="256" height="256">
+        <img src="img/icono3.png" alt="Etapa de pausa" width="256" height="256">
+        <img src="img/icono4.png" alt="Etapa final" width="256" height="256">
+      </div>
+    </aside>
+
+    <div class="barwrap" aria-label="Progreso de la actividad">
+      <div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="bar">
+        <div class="fill" id="fill"></div>
+      </div>
+    </div>
+
+    <main class="main">
+      <section class="copy" aria-live="polite">
+        <h1 id="h1"></h1>
+        <div class="brand" id="brand">Clikea</div>
+        <p class="sub" id="sub"></p>
+      </section>
+
+      <div class="stage" id="stage">
+        <img id="tooth" src="img/muela1.png" alt="Mascota de Clikea" width="380" height="390">
+      </div>
+
+      <button class="key" id="key" type="button" aria-label="Haz clic varias veces para llenar la barra">
+        <span class="in">
+          <span class="top" id="top"></span>
+          <b>haz clic</b>
+          <span class="low">Varias veces</span>
+        </span>
+        <span class="hand" aria-hidden="true">&#9757;</span>
+      </button>
+
+      <section class="win" id="win" hidden aria-live="polite">
+        <div class="cta">
+          <a class="pill" id="link" href="#" target="_blank" rel="noopener noreferrer">
+            Clic para
+            <small>ser parte de la transformacion</small>
+          </a>
+          <p>Escribe tu nombre en el enlace y espera la sorpresa que <em>te facilitara tu trabajo.</em></p>
+        </div>
+        <button class="again" id="again" type="button">Volver a jugar</button>
+      </section>
+    </main>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
