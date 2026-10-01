@@ -34,6 +34,7 @@ button, a { font: inherit; }
   grid-template-columns: clamp(72px, 8vw, 112px) clamp(25px, 3vw, 42px) minmax(0, 1fr);
   background: var(--panel);
 }
+
 .side {
   min-width: 0;
   background: linear-gradient(180deg, #26066a, var(--side));
@@ -84,24 +85,60 @@ button, a { font: inherit; }
   transition: height .18s ease-out;
 }
 
+/* =========================================
+   MEJORAS EN LA SECCIÓN PRINCIPAL (MAIN)
+   ========================================= */
 .main {
   position: relative;
   min-width: 0;
   min-height: 100vh;
   min-height: 100dvh;
   display: grid;
-  grid-template-columns: minmax(320px, 1fr) minmax(300px, .82fr);
-  grid-template-rows: auto 1fr;
-  grid-template-areas: "copy stage" "action stage";
+  /* Distribución de columnas equitativas para mejor centrado */
+  grid-template-columns: 1fr 1fr; 
+  grid-template-rows: auto auto;
+  grid-template-areas: 
+    "copy stage" 
+    "action stage";
+  align-content: center; /* Alineación vertical perfecta */
   align-items: center;
   justify-items: center;
-  gap: clamp(18px, 3vw, 48px);
-  padding: max(34px, env(safe-area-inset-top)) clamp(28px, 5vw, 82px) max(34px, env(safe-area-inset-bottom));
+  gap: 30px clamp(20px, 4vw, 50px);
+  /* Espacio superior extra para no chocar con el logo */
+  padding: max(100px, 12vh) clamp(28px, 5vw, 82px) max(40px, env(safe-area-inset-bottom));
   text-align: center;
   background: radial-gradient(circle at 76% 30%, #320078 0, var(--bg) 58%);
   overflow: hidden;
 }
-.copy { grid-area: copy; align-self: end; width: min(100%, 720px); }
+
+/* NUEVO: Contenedor del Logo */
+.logo-container {
+  position: absolute;
+  top: clamp(20px, 4vh, 40px);
+  left: clamp(25px, 4vw, 50px);
+  width: clamp(120px, 15vw, 180px);
+  height: auto;
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  z-index: 50;
+  
+  /* ESTILOS DE PRUEBA (puedes borrarlos cuando pongas tu imagen real) */
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px dashed var(--muted);
+  border-radius: 8px;
+  padding: 10px;
+  font-weight: 700;
+  font-size: 14px;
+}
+.logo-container img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.copy { grid-area: copy; align-self: end; width: 100%; max-width: 580px; }
 h1 { margin: 0; font-size: clamp(30px, 3.4vw, 58px); line-height: 1.08; font-weight: 750; text-wrap: balance; }
 .brand { margin: 4px 0; color: var(--accent); font-size: clamp(56px, 6.2vw, 104px); font-weight: 800; line-height: .98; letter-spacing: -3px; }
 .sub { margin: 7px auto 0; max-width: 42rem; font-size: clamp(17px, 1.5vw, 25px); line-height: 1.35; font-weight: 650; text-wrap: balance; }
@@ -109,7 +146,8 @@ h1 { margin: 0; font-size: clamp(30px, 3.4vw, 58px); line-height: 1.08; font-wei
 .stage {
   grid-area: stage;
   position: relative;
-  width: min(100%, 520px);
+  width: 100%;
+  max-width: 520px;
   align-self: center;
 }
 .stage img {
@@ -125,18 +163,19 @@ h1 { margin: 0; font-size: clamp(30px, 3.4vw, 58px); line-height: 1.08; font-wei
 .key {
   grid-area: action;
   align-self: start;
-  width: min(100%, 470px);
+  width: 100%;
+  max-width: 470px;
   border: 0;
   border-radius: 34px;
   padding: 15px 19px 23px;
   color: #08000f;
   cursor: pointer;
-  background: linear-gradient(#f8f8fb, #d6d6e0);
-  box-shadow: 0 9px 0 #a9a9bb, 0 24px 38px rgba(0,0,0,.43);
+  background: linear-gradient(#ffffff, #d6d6e0);
+  box-shadow: 0 9px 0 #a9a9bb, 0 18px 30px rgba(0,0,0,.35);
   position: relative;
-  transition: transform .06s ease, box-shadow .06s ease;
+  transition: transform .08s ease, box-shadow .08s ease;
 }
-.key:active, .key.down { transform: translateY(7px); box-shadow: 0 2px 0 #a9a9bb, 0 10px 18px rgba(0,0,0,.4); }
+.key:active, .key.down { transform: translateY(7px); box-shadow: 0 2px 0 #a9a9bb, 0 8px 15px rgba(0,0,0,.3); }
 .key .in { display: block; padding: 14px 10px 16px; border-radius: 21px; background: #fff; }
 .key b { display: block; font-size: clamp(34px, 4vw, 54px); font-weight: 800; line-height: 1; }
 .key span { display: block; font-weight: 650; }
@@ -147,32 +186,42 @@ h1 { margin: 0; font-size: clamp(30px, 3.4vw, 58px); line-height: 1.08; font-wei
 .plus { position: absolute; pointer-events: none; z-index: 5; color: var(--accent-2); font-size: 24px; font-weight: 800; animation: up .7s forwards; }
 @keyframes up { to { transform: translateY(-72px); opacity: 0; } }
 
-.win { grid-area: action; align-self: start; width: min(100%, 590px); display: flex; flex-direction: column; align-items: center; }
-.win .cta { width: 100%; padding: 20px 16px 16px; border: 1px solid #5120a8; border-radius: 22px; background: rgba(31,5,82,.32); }
+.win { grid-area: action; align-self: start; width: 100%; max-width: 590px; display: flex; flex-direction: column; align-items: center; }
+.win .cta { width: 100%; padding: 25px 20px; border: 1px solid rgba(210, 11, 210, 0.3); border-radius: 22px; background: rgba(31,5,82,.45); backdrop-filter: blur(8px); }
 .pill { display: block; padding: 14px 24px; border-radius: 999px; color: var(--accent); background: #fff; text-decoration: none; font-size: clamp(22px, 2.4vw, 34px); font-weight: 750; line-height: 1.18; box-shadow: 0 0 0 0 rgba(210,77,255,.7); animation: pulse 1.6s infinite; }
 .pill small { display: block; font-size: .62em; font-weight: 650; }
 @keyframes pulse { to { box-shadow: 0 0 0 18px rgba(210,77,255,0); } }
 .win p { margin: 16px 0 0; font-size: clamp(17px, 1.55vw, 23px); font-weight: 700; line-height: 1.38; }
 .win p em { color: var(--accent); font-style: normal; }
-.again { margin-top: 16px; border: 0; color: var(--muted); background: none; font-size: 14px; font-weight: 650; text-decoration: underline; cursor: pointer; }
+.again { margin-top: 20px; border: 0; color: var(--muted); background: none; font-size: 15px; font-weight: 650; text-decoration: underline; cursor: pointer; transition: color 0.2s ease; }
+.again:hover { color: #fff; }
 .spark { position: absolute; color: #ffd21f; font-size: clamp(24px, 3vw, 40px); animation: tw 1.4s infinite alternate; }
 @keyframes tw { to { transform: scale(.62) rotate(20deg); opacity: .5; } }
 
+/* =========================================
+   MEDIA QUERIES (RESPONSIVE MEJORADO)
+   ========================================= */
 @media (max-width: 900px) {
   .app { grid-template-columns: clamp(66px, 14vw, 88px) 24px minmax(0, 1fr); }
   .main {
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    gap: 0;
-    padding: max(26px, env(safe-area-inset-top)) clamp(14px, 4vw, 30px) max(30px, env(safe-area-inset-bottom));
+    justify-content: center; /* Centrado vertical en móviles */
+    gap: 30px;
+    padding: max(90px, 12vh) clamp(14px, 4vw, 30px) max(40px, env(safe-area-inset-bottom));
   }
-  .copy { width: 100%; }
+  .logo-container {
+    /* Mantiene el logo visible y centrado o ajustado a la izquierda */
+    top: max(20px, env(safe-area-inset-top));
+    left: 20px;
+  }
+  .copy { width: 100%; order: 1; }
+  .stage { width: min(85%, 390px); order: 2; margin: 0; }
+  .key, .win { width: min(94%, 450px); order: 3; }
+  
   h1 { font-size: clamp(25px, 6vw, 39px); }
   .brand { font-size: clamp(52px, 12vw, 78px); }
   .sub { font-size: clamp(15px, 3.7vw, 21px); max-width: 30rem; }
-  .stage { width: min(74%, 390px); margin: clamp(20px, 4vh, 36px) 0 clamp(16px, 3vh, 28px); }
-  .key, .win { width: min(94%, 430px); }
   .bar { height: min(70vh, 620px); height: min(70dvh, 620px); }
 }
 
@@ -182,18 +231,19 @@ h1 { margin: 0; font-size: clamp(30px, 3.4vw, 58px); line-height: 1.08; font-wei
   .tiles { gap: 10px; }
   .side img { width: 88%; }
   .bar { width: 13px; height: min(62vh, 520px); height: min(62dvh, 520px); }
-  .main { padding-left: 10px; padding-right: 10px; }
-  .stage { width: min(82%, 330px); margin-top: 22px; }
-  .key { width: 92%; border-radius: 28px; padding: 13px 16px 20px; }
+  .main { gap: 20px; padding-left: 15px; padding-right: 15px; }
+  .stage { width: min(90%, 330px); }
+  .key { width: 95%; border-radius: 28px; padding: 13px 16px 20px; }
   .key b { font-size: clamp(31px, 9.5vw, 42px); }
 }
 
 @media (max-height: 680px) and (max-width: 900px) {
+  .main { padding-top: 80px; gap: 15px; }
+  .logo-container { top: 15px; width: 100px; height: 30px; padding: 5px; font-size: 11px; }
   .side { gap: 8px; padding-top: 12px; }
   .tiles { gap: 7px; }
   .side img { width: min(58px, 74%); }
-  .main { padding-top: 16px; }
-  .stage { width: min(55%, 250px); margin: 10px 0 9px; }
+  .stage { width: min(50%, 250px); }
   .key .in { padding-top: 8px; padding-bottom: 10px; }
 }
 
