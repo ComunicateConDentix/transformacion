@@ -115,7 +115,7 @@ button, a { font: inherit; }
 .logo-container {
   position: absolute;
   top: clamp(20px, 4vh, 40px);
-  left: clamp(25px, 4vw, 50px);
+  right: clamp(25px, 4vw, 50px);
   width: clamp(120px, 15vw, 180px);
   height: auto;
   min-height: 40px;
@@ -125,8 +125,7 @@ button, a { font: inherit; }
   z-index: 50;
   
   /* ESTILOS DE PRUEBA (puedes borrarlos cuando pongas tu imagen real) */
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px dashed var(--muted);
+  
   border-radius: 8px;
   padding: 10px;
   font-weight: 700;
@@ -181,7 +180,13 @@ h1 { margin: 0; font-size: clamp(30px, 3.4vw, 58px); line-height: 1.08; font-wei
 .key span { display: block; font-weight: 650; }
 .key .top { margin-bottom: 3px; font-size: clamp(17px, 1.6vw, 23px); }
 .key .low { margin-top: 5px; font-size: clamp(12px, 1vw, 15px); font-weight: 750; }
-.key .hand { position: absolute; right: -7px; bottom: -18px; font-size: clamp(44px, 4.5vw, 66px); filter: drop-shadow(0 3px 0 var(--accent)); transform: rotate(-8deg); }
+.key .hand {position: absolute;
+  right: -7px;
+  bottom: -18px;
+  font-size: clamp(44px, 4.5vw, 66px);
+  color: var(--accent); /* Esto pinta el SVG de tu color morado (#d20bd2) */
+  filter: drop-shadow(0 3px 0 rgba(0,0,0,0.15)); /* Sombra neutra más suave */
+  transform: rotate(-8deg); }
 .key:focus-visible, .pill:focus-visible, .again:focus-visible { outline: 3px solid var(--accent-2); outline-offset: 5px; }
 .plus { position: absolute; pointer-events: none; z-index: 5; color: var(--accent-2); font-size: 24px; font-weight: 800; animation: up .7s forwards; }
 @keyframes up { to { transform: translateY(-72px); opacity: 0; } }
